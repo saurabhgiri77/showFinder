@@ -1,20 +1,26 @@
-import { AnyAction, applyMiddleware, createStore } from "redux";
-import { SHOWS_FETCHED } from "./actions";
+import { Reducer } from "redux";
+import { applyMiddleware, createStore } from "redux";
+import { SHOWS_FETCH, SHOWS_FETCHED } from "./actions";
 import { Show } from "./models/show";
 import { rootSaga, sagaMiddleware } from "./sagas";
 
 export type State = {
-  shows: Show[];
+  shows: { [q: string]: Show[] };
+  showsQuery: string;
 };
 
 const initialState: State = {
-  shows: [],
+  shows: {},
+  showsQuery: "",
 };
 
-export const reducer = (state = initialState, action: AnyAction) => {
+export const reducer: Reducer = (state = initialState, action) => {
   switch (action.type) {
+    case SHOWS_FETCH:
+      return { ...state, showsQuery: action.payload, shows: [] };
     case SHOWS_FETCHED:
-      return { ...state, shows: action.payload };
+      const { query, shows } = action.payload;
+      return { ...state, shows: { ...state.shows, [query]: shows } };
     default:
       return state;
   }
