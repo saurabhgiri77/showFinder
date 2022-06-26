@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, memo, useEffect } from "react";
+import { ChangeEvent, FC, memo } from "react";
 import { connect } from "react-redux";
 import { showsFetchAction } from "../actions";
 import { Show } from "../models/show";
@@ -8,7 +8,7 @@ import ShowRow from "./ShowRow";
 
 type Props = {
   query: string;
-  shows: Show[];
+  shows: any[];
   fetchShows: (query: string) => void;
 };
 
