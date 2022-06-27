@@ -1,4 +1,5 @@
 import { FC, memo } from "react";
+import { useNavigate } from "react-router-dom";
 import { Show } from "../models/show";
 
 type Props = {
@@ -6,8 +7,12 @@ type Props = {
 };
 
 const ShowRow: FC<Props> = ({ show }) => {
+  const navigate = useNavigate();
   return (
-    <div className="flex items-stretch space-x-3 bg-blue-500 rounded-lg text-white border-4 border-black">
+    <div
+      onClick={() => navigate("/shows/" + show.id)}
+      className="flex items-stretch space-x-3 cursor-pointer bg-blue-500 rounded-lg text-white border-4 border-black"
+    >
       <img
         className="w-40"
         src={

@@ -26,7 +26,7 @@ const ShowList: FC<Props> = ({ query, shows, fetchShows }) => {
         placeholder="search"
       />
       <div className="space-y-2 ">
-        {shows.map((s) => (
+        {shows.map((s: Show) => (
           <ShowRow key={s.id} show={s} />
         ))}
       </div>
